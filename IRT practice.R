@@ -386,3 +386,5 @@ GHmod2 <- mirt(data, 2, optimizer = 'NR', TOL = .0002,
                technical = list(customTheta = Theta2, customPriorFun = prior))
 summary(GHmod2, suppress=.2)
 ## End(Not run)
+
+##Now I'm just making sure Github plays well with my new laptop.

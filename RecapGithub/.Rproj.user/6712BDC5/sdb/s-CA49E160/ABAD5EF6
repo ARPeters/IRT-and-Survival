@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "################################\n## Setting up\n################################\nlibrary(ltm)\nlibrary(mirt)\nlibrary(TAM)\nlibrary(eRm)\nlibrary(IRTShiny)\nlibrary(psych)\nrm(list = ls(all.names = TRUE))\n\n\n# Note: made need to edit this, depending on where this file is saved. \nsetwd(\"/Users/Andrew/Documents/Github/IRT-and-Survival\")\n\n################################\n## psych\n################################\n\n#Rasch model first,\ndsRasch<-sim.rasch(nvar=5, n=500, low=-2, high=2, d=NULL, a=1, mu=0, sd=1)\ndsRasch\n\n#2pl Logistic model\ndiscrAlphas<-c(.33, .66, 1, 1.33, 1.66, 2)\ndsIRT<-sim.irt(nvar = 6, n = 500, low=-3, high=3,a=discrAlphas,c=0,z=1,d=NULL,mu=0,sd=1,mod=\"logistic\")\ndsIRT\n\n#Analysis; let's do IRT first\n\ntest<-irt.fa(dsIRT$items)\ntest\nstr(test)\ntest$irt$difficulty\ndsIRT$difficulty\n\n#irt.item.diff.rasch\nestBetasRasch1<-irt.item.diff.rasch(dsRasch$items)\nestBetasRasch1\ndsRasch$tau\n\n\n#irt.discrim\nestAlphasRasch1<-irt.discrim(estBetasRasch1, theta=dsRasch$theta, items=dsRasch$items)\nestAlphasRasch1\ndsRasch$theta\n?sim.rasch\n\n\n",
+    "created" : 1457654730107.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "434105880",
+    "id" : "ABAD5EF6",
+    "lastKnownWriteTime" : 1457654775,
+    "last_content_update" : 1457654775090,
+    "path" : "~/GitHub/IRT-and-Survival/IRT practice.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

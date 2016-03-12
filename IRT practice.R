@@ -1,18 +1,17 @@
 ################################
 ## Setting up
 ################################
-library(ltm)
+rm(list = ls(all.names = TRUE))
+# Note: made need to edit this, depending on where this file is saved. 
+#setwd("C:/Users/Andrew/Documents/Github/IRT-and-Survival")
+setwd("C:/Users/APETERS4/Documents/GitHub/IRT-and-Survival")
 library(mirt)
 library(TAM)
 library(eRm)
 library(IRTShiny)
 library(psych)
-rm(list = ls(all.names = TRUE))
-
-
-# Note: made need to edit this, depending on where this file is saved. 
-setwd("/Users/Andrew/Documents/Github/IRT-and-Survival")
-
+library(ltm)
+getwd()
 ################################
 ## psych
 ################################
@@ -47,3 +46,53 @@ dsRasch$theta
 ?sim.rasch
 
 
+
+################################
+## ltm
+################################
+#Can Kinda sorta compare results here:
+#http://www.personality-project.org/r/book/Chapter8.pdf
+
+dsBock<-data(bock)
+head(LSAT)
+dsLaw<-LSAT
+dsLaw$StudentID<-1:nrow(dsLaw)
+
+StudentID<-c(1:nrow(dsLaw))
+
+descript(LSAT)
+descript(dsLaw[,c(1:5)])
+
+rcor.test(dsLaw[c(1:5)])
+
+cronbach.alpha(dsLaw[c(1:5)])
+
+#Return
+unidimTest(LSAT)
+
+LawRasch<-rasch(dsLaw[c(1:5)])
+LawLTM<-ltm(LSAT)
+
+?ltm()
+unidimTest(LawRasch)
+
+head(WIRS)
+dsWIRS<-WIRS
+head(dsWIRS)
+ltm(dsWIRS ~ z1, constr = rbind(c(1, 1, 1), c(6, 2, -0.5)))
+ltm(dsWIRS ~ z1*z2, constr = rbind(c(1, 1, 1), c(6, 2, -0.5)))
+ltm(dsWIRS ~ z1*z2)
+
+?anova()
+anova(ltm(dsWIRS~z1), ltm(dsWIRS~z1+z2))
+
+
+LSATRasch<-rasch(dsLaw[c(1:5)])
+GoF.rasch(LSATRasch)
+ltm0<-ltm(dsLaw[c(1:5)]~z1)
+ltmalt<-ltm(dsLaw[c(1:5)]~z1+z2)
+
+GoF.rasch(rasch(LSAT))
+anova(ltm0, ltmalt)
+
+item.fit(rasch(LSAT))

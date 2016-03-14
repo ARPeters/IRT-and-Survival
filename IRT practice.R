@@ -4,6 +4,7 @@
 rm(list = ls(all.names = TRUE))
 # Note: made need to edit this, depending on where this file is saved. 
 #setwd("C:/Users/Andrew/Documents/Github/IRT-and-Survival")
+setwd("C:/Users/APETERS4/Documents/GitHub")
 setwd("C:/Users/APETERS4/Documents/GitHub/IRT-and-Survival")
 library(mirt)
 library(TAM)
